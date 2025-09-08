@@ -1,0 +1,8 @@
+{
+    "web-search": {
+        "command": "node",
+        "args": [
+            ".strategic-claude-basic/tools/web-search-mcp-v0.3.2/dist/index.js"
+        ]
+    }
+}
