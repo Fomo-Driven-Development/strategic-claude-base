@@ -3,11 +3,13 @@
 Install web-search-mcp by checking requirements and extracting the zip file.
 """
 
-import zipfile
+import hashlib
+import os
 import subprocess
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
+import zipfile
 from pathlib import Path
 from packaging import version
 
@@ -67,6 +69,29 @@ def check_requirements():
     
     return all_met
 
+def verify_file_hash(file_path, expected_hash):
+    """Verify the SHA256 hash of a file."""
+    print("🔍 Verifying file integrity...")
+    
+    try:
+        sha256_hash = hashlib.sha256()
+        with open(file_path, 'rb') as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                sha256_hash.update(chunk)
+        
+        actual_hash = sha256_hash.hexdigest()
+        if actual_hash == expected_hash:
+            print("✅ File integrity verified")
+            return True
+        else:
+            print("❌ Hash mismatch!")
+            print(f"   Expected: {expected_hash}")
+            print(f"   Actual:   {actual_hash}")
+            return False
+    except Exception as e:
+        print(f"❌ Error verifying file hash: {e}")
+        return False
+
 def download_web_search_mcp(tools_dir):
     """Download the web-search-mcp release from GitHub."""
     url = "https://github.com/mrkrsl/web-search-mcp/releases/download/v0.3.2/web-search-mcp-v0.3.2.zip"
@@ -74,8 +99,14 @@ def download_web_search_mcp(tools_dir):
     
     # Check if file already exists
     if zip_file.exists():
-        print(f"📁 {zip_file.name} already exists, skipping download")
-        return True, zip_file
+        print(f"📁 {zip_file.name} already exists, verifying integrity...")
+        expected_hash = "1d8a2aeeda4c927fe513aea6e2f8e5775ac661ec0a15b1cab4d6d617e48dd27e"
+        if verify_file_hash(zip_file, expected_hash):
+            print("📁 Existing file verified, skipping download")
+            return True, zip_file
+        else:
+            print("❌ Existing file is corrupted, re-downloading...")
+            zip_file.unlink()  # Remove the corrupted file
     
     print(f"📥 Downloading {url}...")
     
@@ -115,6 +146,14 @@ def download_web_search_mcp(tools_dir):
                         print(f"📊 Progress: {progress:.1f}%")
         
         print(f"✅ Downloaded {zip_file.name} successfully")
+        
+        # Verify file integrity
+        expected_hash = "1d8a2aeeda4c927fe513aea6e2f8e5775ac661ec0a15b1cab4d6d617e48dd27e"
+        if not verify_file_hash(zip_file, expected_hash):
+            print("❌ File verification failed - removing corrupted download")
+            zip_file.unlink()  # Remove the corrupted file
+            return False, None
+        
         return True, zip_file
         
     except urllib.error.URLError as e:
@@ -125,11 +164,11 @@ def download_web_search_mcp(tools_dir):
         return False, None
 
 def run_npm_setup(extract_dir):
-    """Run npm install, playwright install, and build in the extracted directory."""
-    # Check if build already completed
-    build_marker = extract_dir / ".build_complete"
-    if build_marker.exists():
-        print("🏗️ Build already completed, skipping npm setup")
+    """Run npm install and playwright install in the extracted directory."""
+    # Check if setup already completed
+    setup_marker = extract_dir / ".setup_complete"
+    if setup_marker.exists():
+        print("🔧 Setup already completed, skipping npm setup")
         return True
     
     print(f"📂 Changing to directory: {extract_dir.name}/")
@@ -137,29 +176,30 @@ def run_npm_setup(extract_dir):
     
     try:
         # Change to extract directory
-        import os
         os.chdir(extract_dir)
         
         # Step 1: npm install
         print("📥 Running npm install...")
-        result = subprocess.run(["npm", "install"], 
-                              capture_output=True, text=True, check=True)
+        subprocess.run(["npm", "install"], 
+                      capture_output=True, text=True, check=True)
         print("✅ npm install completed")
         
         # Step 2: npx playwright install
         print("🎭 Running npx playwright install...")
-        result = subprocess.run(["npx", "playwright", "install"], 
-                              capture_output=True, text=True, check=True)
+        subprocess.run(["npx", "playwright", "install"], 
+                      capture_output=True, text=True, check=True)
         print("✅ Playwright browsers installed")
         
-        # Step 3: npm run build
-        print("🏗️ Running npm run build...")
-        result = subprocess.run(["npm", "run", "build"], 
-                              capture_output=True, text=True, check=True)
-        print("✅ Build completed successfully")
+        # Verify that the main executable exists
+        index_js = Path("dist/index.js")
+        if not index_js.exists():
+            print("❌ Critical file dist/index.js is missing!")
+            return False
         
-        # Create build marker file
-        build_marker.touch()
+        print("✅ Installation verified - dist/index.js exists")
+        
+        # Create setup marker file
+        setup_marker.touch()
         
         return True
         
@@ -236,7 +276,7 @@ def main():
         sys.exit(1)
     
     # Run npm setup after successful extraction
-    print("\n🔧 Setting up npm dependencies and building...")
+    print("\n🔧 Setting up npm dependencies...")
     if not run_npm_setup(extract_dir):
         print("\n❌ npm setup failed!")
         sys.exit(1)
@@ -245,7 +285,8 @@ def main():
     print("\nNext steps:")
     print("  • Configure the MCP server in your Claude Code settings")
     print("  • The web-search-mcp package is ready to use")
-    print(f"  • Location: {extract_dir.name}/")
+    if extract_dir:
+        print(f"  • Location: {extract_dir.name}/")
     print("  • Refer to package.json for usage details")
 
 if __name__ == "__main__":
