@@ -34,7 +34,7 @@ The following MCP tools are now available through the web-search-researcher agen
 - `/read_and_execute_plan <plan_file>` - Execute plans with validation
 
 ### Documentation & Tracking
-- `/summary [plan_reference]` - Problem-focused work summaries
+- `/summarize [plan_reference]` - Problem-focused work summaries
 - `/validate_summary <summary_file>` - Validate and archive summaries
 - `/create_issue <subject_or_file>` - Create issue documentation
 
@@ -68,7 +68,7 @@ Get current date: `date '+%d-%m-%Y-%a' | tr '[:upper:]' '[:lower:]'`
 
 1. Start with `/research` for exploration (now enhanced with MCP web search tools)
 2. Use `/plan` to create implementation strategies
-3. Use `/summary` to document problems and progress
+3. Use `/summarize` to document problems and progress
 4. Always check directory CLAUDE.md files for specific conventions
 
 ## Claude Code Router Compatibility

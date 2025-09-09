@@ -7,10 +7,16 @@
 
 **CRITICAL**: All summary documents in this directory MUST follow this exact pattern:
 
-**When connected to a plan**:
+**When connected to a PLAN document**:
 
 ```
-SUMMARY_NNNN_DD-MM-YYYY_day_subject.md
+SUMMARY_PLAN_NNNN_DD-MM-YYYY_day_subject.md
+```
+
+**When connected to a TEST document**:
+
+```
+SUMMARY_TEST_NNNN_DD-MM-YYYY_day_subject.md
 ```
 
 **When no plan exists**:
@@ -31,13 +37,17 @@ Where:
 **Primary Rule**: Summaries should ALWAYS be connected to a plan document when possible.
 
 - Use the EXACT same NNNN number as the associated plan
-- Use the EXACT same subject as the associated plan
+- Use the EXACT same subject as the associated plan  
+- Include the plan type (PLAN or TEST) in the summary name
 - Match the date format and day name convention
 
-**Example**:
+**Examples**:
 
 - Plan: `PLAN_0001_07-09-2025_sat_user-authentication-system.md`
-- Summary: `SUMMARY_0001_07-09-2025_sat_user-authentication-system.md`
+- Summary: `SUMMARY_PLAN_0001_07-09-2025_sat_user-authentication-system.md`
+
+- Test Plan: `TEST_0001_07-09-2025_sat_user-authentication-system.md`
+- Summary: `SUMMARY_TEST_0001_07-09-2025_sat_user-authentication-system.md`
 
 **Only omit NNNN** when explicitly creating a summary with no associated plan document.
 
@@ -68,6 +78,8 @@ When working in this directory:
 This naming convention ensures:
 
 - Clear connection between summaries and their associated plans
+- Prevention of overwriting between PLAN and TEST summaries
+- Distinct tracking of implementation vs. test work
 - Chronological ordering of summary documents
 - Consistent documentation standards across the project
 - Easy traceability from implementation results back to original plans

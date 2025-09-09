@@ -15,6 +15,10 @@ When this command is invoked:
 
 1. **Check for uncommitted work first**:
 
+   ```bash
+   git status --porcelain
+   ```
+
    - If there are no uncommitted changes, respond with:
 
    ```
@@ -26,8 +30,8 @@ When this command is invoked:
    1. Complete some implementation work, or
    2. Specify what you'd like me to summarize if you've already committed your changes
 
-   Usage: `/summary` - Auto-detect current work
-   Usage: `/summary PLAN_0001_...` - Summarize work for specific plan
+   Usage: `/summarize` - Auto-detect current work
+   Usage: `/summarize PLAN_0001_...` - Summarize work for specific plan
    ```
 
 2. **If uncommitted changes exist**, proceed immediately to context analysis
@@ -155,11 +159,17 @@ When this command is invoked:
 
 2. **Determine naming convention**:
 
-   **If connected to a plan**:
+   **If connected to a PLAN document**:
 
    - Use EXACT same NNNN number as the plan
    - Use EXACT same subject as the plan
-   - Format: `SUMMARY_NNNN_DD-MM-YYYY_day_subject.md`
+   - Format: `SUMMARY_PLAN_NNNN_DD-MM-YYYY_day_subject.md`
+
+   **If connected to a TEST document**:
+
+   - Use EXACT same NNNN number as the test plan
+   - Use EXACT same subject as the test plan
+   - Format: `SUMMARY_TEST_NNNN_DD-MM-YYYY_day_subject.md`
 
    **If no plan connection**:
 
@@ -228,7 +238,7 @@ When this command is invoked:
 5. **Follow Standards**:
 
    - Use the summary template consistently
-   - Match plan naming when connected to a plan
+   - Match plan naming when connected to a plan (include PLAN or TEST prefix)
    - Update CLAUDE.md with new document entries
    - Include proper metadata and references
 
@@ -236,9 +246,10 @@ When this command is invoked:
 
 ### Scenario 1: Plan Implementation
 
-When working from an existing plan:
+When working from an existing PLAN or TEST document:
 
-- Match the plan's NNNN number and subject exactly
+- Match the document's NNNN number and subject exactly
+- Include PLAN or TEST prefix in the summary filename
 - Compare actual work done vs. planned tasks
 - Identify which plan tasks remain incomplete
 - Note any deviations or discoveries made during implementation
@@ -264,11 +275,11 @@ When work doesn't complete successfully:
 ## Example Usage
 
 ```
-User: /summary
+User: /summarize
 Assistant: [Checks git status, finds changes, analyzes conversation]
 Assistant: Found uncommitted changes in 5 files. You were implementing user authentication from PLAN_0001_06-09-2025_fri_user-auth-system.md. Creating summary...
 
-User: /summary PLAN_0002_07-09-2025_sat_api-refactoring
+User: /summarize PLAN_0002_07-09-2025_sat_api-refactoring
 Assistant: [Analyzes work done for that specific plan]
 ```
 
