@@ -19,7 +19,9 @@ When this command is invoked:
    git status --porcelain
    ```
 
-   - If there are no uncommitted changes, respond with:
+2. **If uncommitted changes exist**, proceed immediately to context analysis
+
+3. **If there are no uncommitted changes, respond with**:
 
    ```
    I don't see any uncommitted changes in your repository.
@@ -33,8 +35,6 @@ When this command is invoked:
    Usage: `/summarize` - Auto-detect current work
    Usage: `/summarize PLAN_0001_...` - Summarize work for specific plan
    ```
-
-2. **If uncommitted changes exist**, proceed immediately to context analysis
 
 ## Process Steps
 
