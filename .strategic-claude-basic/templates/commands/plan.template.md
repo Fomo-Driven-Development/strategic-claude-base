@@ -47,18 +47,17 @@
 
 #### Automated Verification:
 
-- [ ] Migration applies cleanly: `make migrate`
-- [ ] Unit tests pass: `make test-component`
+- [ ] Code compiles/builds successfully: `[build command]`
 - [ ] Type checking passes: `npm run typecheck`
 - [ ] Linting passes: `make lint`
-- [ ] Integration tests pass: `make test-integration`
+- [ ] Migration applies cleanly: `make migrate` (if applicable)
 
 #### Manual Verification:
 
-- [ ] Feature works as expected when tested via UI
-- [ ] Performance is acceptable under load
-- [ ] Edge case handling verified manually
-- [ ] No regressions in related features
+- [ ] Feature implementation matches specification
+- [ ] Integration points connect as designed
+- [ ] No build or deployment errors
+- [ ] Ready for testing (see related test plan)
 
 ---
 
@@ -68,22 +67,11 @@
 
 ---
 
-## Testing Strategy
+## Test Plan Reference
 
-### Unit Tests:
+**Related Test Plan**: `.strategic-claude-basic/plan/TEST_[NNNN]_[date]_[subject].md`
 
-- [What to test]
-- [Key edge cases]
-
-### Integration Tests:
-
-- [End-to-end scenarios]
-
-### Manual Testing Steps:
-
-1. [Specific step to verify feature]
-2. [Another verification step]
-3. [Edge case to test manually]
+[Brief note about what aspects require testing - detailed testing strategy, coverage requirements, and test implementation are covered in the dedicated test plan]
 
 ## Performance Considerations
 
@@ -97,5 +85,7 @@
 
 - Related research: `.strategic-claude-basic/research/[relevant].md`
 - Similar implementation: `[file:line]`
+
+```
 
 ```

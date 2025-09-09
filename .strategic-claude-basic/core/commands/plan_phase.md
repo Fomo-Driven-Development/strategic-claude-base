@@ -184,10 +184,12 @@ Then wait for the user's input.
    - Identify technical challenges and solutions
    - Return specific file:line references
    - Understand integration points and dependencies
+   - **For test planning**: Identify existing test patterns, frameworks, and coverage gaps
+   - **For test planning**: Find test utilities, fixtures, and validation approaches used in codebase
 
 5. **Wait for ALL sub-tasks to complete** before proceeding with planning
 
-### Step 4: Implementation Plan Generation
+### Step 4: Implementation and Test Plan Generation
 
 1. **For each milestone to be planned**:
 
@@ -217,8 +219,17 @@ Then wait for the user's input.
    - Use template: `@.strategic-claude-basic/templates/commands/plan.template.md`
    - Replace ALL bracketed placeholders with actual milestone details
    - Follow naming convention: `PLAN_NNNN_DD-MM-YYYY_day_phase[X]-[Y]-[subject].md`
+   - Focus on building phases, architecture, and implementation approach
 
-3. **Structure plan around milestone deliverables**:
+3. **Create test plan document for the same milestone**:
+
+   - Use template: `@.strategic-claude-basic/templates/commands/test_plan.template.md`
+   - Replace ALL bracketed placeholders with test-specific milestone details
+   - Follow naming convention: `TEST_NNNN_DD-MM-YYYY_day_phase[X]-[Y]-[subject].md` (same number as implementation plan)
+   - Cross-reference the implementation plan in References section
+   - Focus on test coverage, validation strategy, and quality assurance for milestone deliverables
+
+4. **Structure both plans around milestone deliverables**:
 
    For each major deliverable:
 
@@ -228,45 +239,69 @@ Then wait for the user's input.
    - Success validation (automated and manual criteria)
    - Integration points (how it connects to other components)
 
-4. **Write plan document to**: `.strategic-claude-basic/plan/[filename]` using the naming convention
+5. **Write both plan documents to**: `.strategic-claude-basic/plan/` using the naming conventions
 
-5. **Update the planning registry**: Add entry to `.strategic-claude-basic/plan/CLAUDE.md`
+   - Implementation plan: `PLAN_NNNN_date_phase[X]-[Y]-subject.md`
+   - Test plan: `TEST_NNNN_date_phase[X]-[Y]-subject.md`
+
+6. **Update the planning registry**: Add both entries to `.strategic-claude-basic/plan/CLAUDE.md`
 
 ### Step 5: Plan Presentation and Completion
 
 1. **For single milestone planning**:
 
    ```
-   I've created a focused implementation plan for Milestone [X.Y]: [Milestone Name]
+   I've created both implementation and test plans for Milestone [X.Y]: [Milestone Name]
 
-   **Plan Document**: `.strategic-claude-basic/plan/[filename].md`
+   **Implementation Plan**: `.strategic-claude-basic/plan/PLAN_[NNNN]_[date]_phase[X]-[Y]-[subject].md`
+   - Focuses on building the milestone deliverables
+   - Implementation phases and technical approach
+   - Integration points and dependencies
+
+   **Test Plan**: `.strategic-claude-basic/plan/TEST_[NNNN]_[date]_phase[X]-[Y]-[subject].md`
+   - Focuses on validating the milestone deliverables
+   - Test coverage strategy and test types
+   - Quality assurance and verification procedures
 
    **Key Implementation Areas**:
    - [Technical area 1 with specific approach]
    - [Technical area 2 with integration points]
    - [Technical area 3 with success criteria]
 
-   **Success Criteria**: [X] automated verification steps, [Y] manual verification steps
+   **Test Coverage Areas**:
+   - [Test area 1 with coverage strategy]
+   - [Test area 2 with validation approach]
+   - [Test area 3 with quality metrics]
 
-   The plan is ready for implementation and includes specific file paths, code examples, and verification procedures.
+   Both plans are ready for execution and include specific file paths, code examples, and comprehensive verification procedures.
    ```
 
 2. **For full phase planning**:
 
    ```
-   I've created implementation plans for all milestones in Phase [X]: [Phase Name]
+   I've created both implementation and test plans for all milestones in Phase [X]: [Phase Name]
 
    **Plan Documents Created**:
-   - `.strategic-claude-basic/plan/PLAN_NNNN_..._phase[X]-1-[name].md` - [Milestone X.1 Name]
-   - `.strategic-claude-basic/plan/PLAN_NNNN+1_..._phase[X]-2-[name].md` - [Milestone X.2 Name]
-   - `.strategic-claude-basic/plan/PLAN_NNNN+2_..._phase[X]-3-[name].md` - [Milestone X.3 Name]
+
+   **Milestone [X.1]: [Milestone X.1 Name]**
+   - Implementation: `.strategic-claude-basic/plan/PLAN_NNNN_..._phase[X]-1-[name].md`
+   - Test: `.strategic-claude-basic/plan/TEST_NNNN_..._phase[X]-1-[name].md`
+
+   **Milestone [X.2]: [Milestone X.2 Name]**
+   - Implementation: `.strategic-claude-basic/plan/PLAN_NNNN+1_..._phase[X]-2-[name].md`
+   - Test: `.strategic-claude-basic/plan/TEST_NNNN+1_..._phase[X]-2-[name].md`
+
+   **Milestone [X.3]: [Milestone X.3 Name]**
+   - Implementation: `.strategic-claude-basic/plan/PLAN_NNNN+2_..._phase[X]-3-[name].md`
+   - Test: `.strategic-claude-basic/plan/TEST_NNNN+2_..._phase[X]-3-[name].md`
 
    **Phase Overview**:
+   - Total Documents: [6 documents - 3 implementation + 3 test plans]
    - Total Deliverables: [Number across all milestones]
    - Implementation Timeline: [Phase duration]
-   - Success Criteria: [Total automated and manual verification steps]
+   - Test Coverage: [Comprehensive testing strategy across milestones]
 
-   Each plan is milestone-focused with specific implementation steps, code examples, and verification procedures.
+   Each plan pair is milestone-focused with implementation providing technical approach and test plan providing comprehensive validation strategy.
    ```
 
 ## Important Guidelines
@@ -302,6 +337,8 @@ Then wait for the user's input.
 
 ### For Single Milestone Plans:
 
+**Implementation Plan (PLAN\_):**
+
 - [ ] Milestone objectives clearly addressed
 - [ ] All deliverables have implementation approaches
 - [ ] Success criteria include automated and manual verification
@@ -309,14 +346,25 @@ Then wait for the user's input.
 - [ ] Technical challenges from research addressed
 - [ ] Specific file:line references provided for implementation
 
+**Test Plan (TEST\_):**
+
+- [ ] Test coverage aligns with milestone deliverables
+- [ ] Test strategy addresses implementation complexity
+- [ ] Test data and fixture requirements defined
+- [ ] Cross-references implementation plan in References section
+- [ ] Test automation and CI integration specified
+- [ ] Quality metrics and validation criteria established
+
 ### For Full Phase Plans:
 
-- [ ] Separate plan created for each milestone in the phase
+- [ ] Separate implementation and test plan pair created for each milestone in the phase
 - [ ] Each plan maintains milestone-specific focus
-- [ ] Cross-milestone dependencies identified
-- [ ] Phase-level coordination considerations included
-- [ ] Sequential numbering follows CLAUDE.md conventions
-- [ ] All milestone plans meet single milestone standards
+- [ ] Cross-milestone dependencies identified in implementation plans
+- [ ] Phase-level integration testing considerations included in test plans
+- [ ] Sequential numbering follows CLAUDE.md conventions (shared numbering for pairs)
+- [ ] All implementation plans meet implementation plan standards
+- [ ] All test plans meet test plan standards
+- [ ] Plan pairs cross-reference each other appropriately
 
 ## Milestone Planning Focus Areas
 

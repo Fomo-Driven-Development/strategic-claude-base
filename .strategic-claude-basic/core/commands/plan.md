@@ -175,33 +175,104 @@ Once aligned on approach:
 
 2. **Get feedback on structure** before writing details
 
-### Step 4: Detailed Plan Writing
+### Step 4: Test Requirements Assessment
 
-After structure approval:
+Before detailed plan writing:
 
-1. **Generate plan document:**
+1. **Analyze if tests are required:**
+
+   - Scan research documents, requirements, and user input for test-related keywords:
+     - "test", "testing", "unit test", "integration test", "e2e", "coverage"
+     - "verify", "validate", "quality assurance", "QA"
+     - "automated testing", "test suite", "test cases"
+   - Look for mentions of test frameworks, testing tools, or test files
+   - Consider the complexity and criticality of the feature
+
+2. **Ask user for test requirements if unclear:**
+
+   ```
+   Based on the scope of this implementation, I need to understand the testing requirements:
+
+   **Detected potential testing needs:**
+   - [Specific areas that likely need testing]
+   - [Complex logic that should be validated]
+   - [Integration points that need verification]
+
+   **Questions:**
+   - Should I create a separate test plan for this feature?
+   - What types of tests are required (unit, integration, e2e)?
+   - Are there existing test patterns I should follow?
+
+   I can create either:
+   1. **Implementation plan only** - Focus on building the feature
+   2. **Implementation + Test plans** - Separate detailed plans for building and testing
+   ```
+
+3. **Determine plan creation strategy:**
+   - **Tests Required**: Create both implementation and test plans
+   - **No Tests Required**: Create implementation plan only
+
+### Step 5: Detailed Plan Writing
+
+After structure approval and test requirements determination:
+
+1. **Generate implementation plan document:**
+
    - Use template: `@.strategic-claude-basic/templates/commands/plan.template.md`
    - Replace ALL bracketed placeholders with actual details.
    - Follow naming convention from: `@.strategic-claude-basic/plan/CLAUDE.md`
-   - Write document to: `@.strategic-claude-basic/plan/[filename]` using the naming convention rules
-   - Update the `@.strategic-claude-basic/plan/CLAUDE.md` file with the new document entry
+   - Write document to: `@.strategic-claude-basic/plan/PLAN_[NNNN]_[date]_[subject].md`
+   - Focus on implementation phases, architecture, and building the feature
 
-### Step 5: Review
+2. **Generate test plan document (if tests required):**
 
-1. **Present the draft plan location**:
+   - Use template: `@.strategic-claude-basic/templates/commands/test_plan.template.md`
+   - Replace ALL bracketed placeholders with test-specific details
+   - Follow naming convention: `TEST_[NNNN]_[date]_[subject].md`
+   - Cross-reference the implementation plan
+   - Focus on test coverage, test types, and validation strategy
+
+3. **Update plan registry:**
+   - Add both documents to `@.strategic-claude-basic/plan/CLAUDE.md`
+   - Maintain sequential numbering for both PLAN* and TEST* documents
+
+### Step 6: Review
+
+1. **Present the draft plan location(s)**:
+
+**For implementation plan only:**
 
 ```
-
-I've created the initial implementation plan at:
-`.strategic-claude-basic/plans/[filename].md`
+I've created the implementation plan at:
+`.strategic-claude-basic/plan/PLAN_[NNNN]_[date]_[subject].md`
 
 Please review it and let me know:
-
 - Are the phases properly scoped?
 - Are the success criteria specific enough?
 - Any technical details that need adjustment?
 - Missing edge cases or considerations?
+```
 
+**For implementation + test plans:**
+
+```
+I've created both implementation and test plans:
+
+**Implementation Plan**: `.strategic-claude-basic/plan/PLAN_[NNNN]_[date]_[subject].md`
+- Focuses on building the feature
+- Implementation phases and architecture
+- Integration points and dependencies
+
+**Test Plan**: `.strategic-claude-basic/plan/TEST_[NNNN]_[date]_[subject].md`
+- Focuses on validating the feature
+- Test coverage strategy and test types
+- Test data management and CI integration
+
+Please review both plans and let me know:
+- Are the implementation phases properly scoped?
+- Does the test coverage address all critical paths?
+- Are the success criteria specific enough for both building and testing?
+- Any technical details that need adjustment in either plan?
 ```
 
 2. **Iterate based on feedback** - be ready to:
