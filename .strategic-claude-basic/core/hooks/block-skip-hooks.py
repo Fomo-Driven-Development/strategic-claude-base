@@ -16,7 +16,8 @@ from notifications import (
     get_project_context,
     send_notification,
     play_audio,
-    PROJECT_NAME,
+    PROJECT_TITLE,
+    PROJECT_TAG,
 )
 
 HOOK_NAME = "block-skip-hooks"
@@ -29,7 +30,7 @@ QUALITY_FIX_COMMANDS = [
     "• Fix formatting issues",
     "• Address linting warnings",
     "• Resolve test failures",
-    "• Fix pre-commit hook violations"
+    "• Fix pre-commit hook violations",
 ]
 
 
@@ -60,10 +61,9 @@ All hook bypass attempts are logged and monitored."""
 
         success = send_notification(
             message=message,
-            title=f"🚨 {PROJECT_NAME.replace('-', ' ').title()}: Security Alert",
+            title=f"🚨 {PROJECT_TITLE}: Security Alert",
             priority="high",
-            tags=["rotating_light", "warning", "security", PROJECT_NAME.lower()],
-            topic_type="alerts",
+            tags=["rotating_light", "warning", "security", PROJECT_TAG],
             project_info=project_info,
             session_id=session_id,
             hook_name=HOOK_NAME,
@@ -87,7 +87,7 @@ def main() -> None:
         if not ENABLE_HOOK_BYPASS_PROTECTION:
             sys.stdout.write(json.dumps({"decision": "approve"}) + "\n")
             return
-            
+
         # Read the hook input from stdin
         hook_input = json.loads(sys.stdin.read())
 
@@ -108,7 +108,7 @@ def main() -> None:
                 "🚫 Blocked: Bypassing Git hooks is not allowed.\n\n"
                 f"Fix the actual code issues:\n"
                 f"{fix_commands}\n\n"
-                f"Quality checks ensure {PROJECT_NAME.replace('-', ' ').title()} excellence."
+                f"Quality checks ensure {PROJECT_TITLE} excellence."
             )
 
             send_security_alert(
@@ -125,16 +125,14 @@ def main() -> None:
             return
 
         # Block git commit amend and no-edit flags
-        if "git commit" in command and (
-            "--amend" in command or "--no-edit" in command
-        ):
+        if "git commit" in command and ("--amend" in command or "--no-edit" in command):
             error_message = (
                 "🚫 Blocked: Git commit amendments without proper review are not allowed.\n\n"
                 "Instead of amending:\n"
                 "• Create a new commit with proper description\n"
                 "• Use interactive rebase if history needs modification\n"
                 "• Ensure all changes are properly reviewed\n\n"
-                f"Transparent commit history maintains {PROJECT_NAME.replace('-', ' ').title()} integrity."
+                f"Transparent commit history maintains {PROJECT_TITLE} integrity."
             )
 
             send_security_alert(

@@ -15,10 +15,10 @@ from typing import Optional, List
 
 # Configuration constants
 PROJECT_NAME = "strategic-claude-basic"
+PROJECT_TITLE = PROJECT_NAME.replace('-', ' ').title()
+PROJECT_TAG = PROJECT_NAME.lower()
 NTFY_SERVER_URL = "http://nas1-oryx:2586"
-NTFY_DEV_TOPIC = f"{PROJECT_NAME}-dev"
-NTFY_NOTIFICATION_TOPIC = f"{PROJECT_NAME}-notifications"
-NTFY_ALERT_TOPIC = f"{PROJECT_NAME}-alerts"
+NTFY_TOPIC = f"{PROJECT_NAME}"
 PROJECT_TYPE = "Claude project"
 
 
@@ -229,9 +229,7 @@ def get_project_config() -> dict:
     """
     return {
         "ntfy_server": NTFY_SERVER_URL,
-        "dev_topic": NTFY_DEV_TOPIC,
-        "notification_topic": NTFY_NOTIFICATION_TOPIC,
-        "alert_topic": NTFY_ALERT_TOPIC,
+        "topic": NTFY_TOPIC,
     }
 
 
@@ -260,7 +258,6 @@ def send_notification(
     title: str,
     priority: str = "default",
     tags: Optional[List[str]] = None,
-    topic_type: str = "dev",
     project_info: Optional[dict] = None,
     session_id: str = "unknown",
     hook_name: str = "notifications",
@@ -273,7 +270,6 @@ def send_notification(
         title: Notification title
         priority: Notification priority (default, low, high, max)
         tags: Optional list of tags
-        topic_type: Type of topic (dev, notifications, alerts)
         project_info: Project context (if None, will be detected from cwd)
         session_id: Claude Code session ID
         hook_name: Name of the calling hook
@@ -282,17 +278,10 @@ def send_notification(
         True if notification was sent successfully, False otherwise
     """
     config = get_project_config()
-
-    # Select topic based on type
-    topic_map = {
-        "dev": config["dev_topic"],
-        "notifications": config["notification_topic"],
-        "alerts": config["alert_topic"],
-    }
-    topic = topic_map.get(topic_type, config["dev_topic"])
+    topic = config["topic"]
 
     # Add project tag if not present
-    project_tag = PROJECT_NAME.lower()
+    project_tag = PROJECT_TAG
     if tags is None:
         tags = [project_tag]
     elif project_tag not in tags:
@@ -302,10 +291,10 @@ def send_notification(
     if project_info:
         header = format_message_header(project_info, session_id)
         formatted_message = (
-            f"{PROJECT_NAME.replace('-', ' ').title()} Development\n\n{header}\n\n**Message**: {message}"
+            f"{PROJECT_TITLE} Development\n\n{header}\n\n**Message**: {message}"
         )
     else:
-        formatted_message = f"{PROJECT_NAME.replace('-', ' ').title()}: {message}"
+        formatted_message = f"{PROJECT_TITLE}: {message}"
 
     return send_ntfy_notification(
         server_url=config["ntfy_server"],

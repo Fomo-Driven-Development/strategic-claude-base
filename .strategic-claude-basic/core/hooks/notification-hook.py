@@ -16,7 +16,8 @@ from notifications import (
     get_project_context,
     send_notification,
     play_audio,
-    PROJECT_NAME,
+    PROJECT_TITLE,
+    PROJECT_TAG,
 )
 
 HOOK_NAME = "notification-hook"
@@ -40,8 +41,8 @@ def analyze_message_content(
         Tuple of (priority, title, tags)
     """
     message_lower = message.lower()
-    project_title = PROJECT_NAME.replace('-', ' ').title()  # Calculate once, reuse
-    project_tag = PROJECT_NAME.lower()  # Also calculate once for tags
+    project_title = PROJECT_TITLE  # Use pre-calculated constant
+    project_tag = PROJECT_TAG  # Use pre-calculated constant
 
     # High priority situations
     if "permission" in message_lower or "approval" in message_lower:
@@ -101,7 +102,7 @@ def main() -> None:
         # Check if notifications are enabled
         if not ENABLE_NOTIFICATIONS:
             return
-            
+
         # Read hook input
         hook_input = json.loads(sys.stdin.read())
 
@@ -132,7 +133,6 @@ def main() -> None:
             title=title,
             priority=priority,
             tags=tags,
-            topic_type="notifications",
             project_info=project_info,
             session_id=session_id,
             hook_name=HOOK_NAME,

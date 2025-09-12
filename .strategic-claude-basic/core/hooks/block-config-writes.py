@@ -15,7 +15,8 @@ from notifications import (
     get_project_context,
     send_notification,
     play_audio,
-    PROJECT_NAME,
+    PROJECT_TITLE,
+    PROJECT_TAG,
 )
 
 HOOK_NAME = "block-config-writes"
@@ -25,7 +26,7 @@ ENABLE_CONFIG_PROTECTION = True
 
 # Protected configuration files - modify this list for your project needs
 PROTECTED_CONFIG_FILES = [
-    ".golangci.yml",           # Go linting config
+    ".golangci.yml",  # Go linting config
     ".pre-commit-config.yaml",  # Pre-commit hooks config
     # Add more protected files as needed
 ]
@@ -58,10 +59,9 @@ Fix the code, not the linting rules."""
 
         success = send_notification(
             message=message,
-            title=f"🚨 {PROJECT_NAME.replace('-', ' ').title()}: Config Protection",
+            title=f"🚨 {PROJECT_TITLE}: Config Protection",
             priority="high",
-            tags=["rotating_light", "warning", "config", PROJECT_NAME.lower()],
-            topic_type="alerts",
+            tags=["rotating_light", "warning", "config", PROJECT_TAG],
             project_info=project_info,
             session_id=session_id,
             hook_name=HOOK_NAME,
@@ -107,7 +107,7 @@ def main() -> None:
                     f"🚫 Blocked: Quality config modification not allowed.\n\n"
                     f"File: {config_file}\n"
                     f"Fix the code, not the linting rules.\n\n"
-                    f"Quality standards ensure {PROJECT_NAME.replace('-', ' ').title()} excellence."
+                    f"Quality standards ensure {PROJECT_TITLE} excellence."
                 )
 
                 send_security_alert(

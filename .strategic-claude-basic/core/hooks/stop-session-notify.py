@@ -17,7 +17,8 @@ from notifications import (
     get_project_context,
     send_notification,
     play_audio,
-    PROJECT_NAME,
+    PROJECT_TITLE,
+    PROJECT_TAG,
 )
 
 HOOK_NAME = "stop-session-notify"
@@ -74,20 +75,20 @@ def determine_notification_characteristics(session_info: dict) -> tuple[str, str
 
     if session_info["success"] and activity_type in ["git commit", "testing"]:
         priority = "high"
-        tags = ["white_check_mark", "rocket", PROJECT_NAME.lower()]
-        title = f"{PROJECT_NAME.replace('-', ' ').title()}: {activity_type.title()} Session Complete"
+        tags = ["white_check_mark", "rocket", PROJECT_TAG]
+        title = f"{PROJECT_TITLE}: {activity_type.title()} Session Complete"
     elif activity_type in ["research", "documentation"]:
         priority = "default"
-        tags = ["book", "lightbulb", PROJECT_NAME.lower()]
-        title = f"{PROJECT_NAME.replace('-', ' ').title()}: {activity_type.title()} Session"
+        tags = ["book", "lightbulb", PROJECT_TAG]
+        title = f"{PROJECT_TITLE}: {activity_type.title()} Session"
     elif activity_type in ["refactoring", "debugging"]:
         priority = "default"
-        tags = ["wrench", "gear", PROJECT_NAME.lower()]
-        title = f"{PROJECT_NAME.replace('-', ' ').title()}: {activity_type.title()} Session"
+        tags = ["wrench", "gear", PROJECT_TAG]
+        title = f"{PROJECT_TITLE}: {activity_type.title()} Session"
     else:
         priority = "default"
-        tags = ["gear", "construction", PROJECT_NAME.lower()]
-        title = f"{PROJECT_NAME.replace('-', ' ').title()}: Development Session Complete"
+        tags = ["gear", "construction", PROJECT_TAG]
+        title = f"{PROJECT_TITLE}: Development Session Complete"
 
     return priority, title, tags
 
@@ -120,7 +121,6 @@ def main() -> None:
             title=title,
             priority=priority,
             tags=tags,
-            topic_type="dev",
             project_info=project_info,
             session_id=session_id,
             hook_name=HOOK_NAME,

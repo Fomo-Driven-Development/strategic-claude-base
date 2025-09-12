@@ -17,7 +17,8 @@ from notifications import (
     get_project_context,
     send_notification,
     play_audio,
-    PROJECT_NAME,
+    PROJECT_TITLE,
+    PROJECT_TAG,
 )
 
 HOOK_NAME = "precompact-notify"
@@ -35,8 +36,8 @@ def get_compact_notification_info() -> Tuple[str, str, List[str]]:
         Tuple of (priority, title, tags)
     """
     priority = "high"
-    title = f"{PROJECT_NAME.replace('-', ' ').title()}: Auto-Compact Triggered"
-    tags = ["exclamation", "fire", PROJECT_NAME.lower(), "compact"]
+    title = f"{PROJECT_TITLE}: Auto-Compact Triggered"
+    tags = ["exclamation", "fire", PROJECT_TAG, "compact"]
 
     return priority, title, tags
 
@@ -47,7 +48,7 @@ def main() -> None:
         # Check if compact notifications are enabled
         if not ENABLE_COMPACT_NOTIFICATIONS:
             return
-            
+
         # Read hook input
         hook_input = json.loads(sys.stdin.read())
 
@@ -78,7 +79,6 @@ def main() -> None:
             title=title,
             priority=priority,
             tags=tags,
-            topic_type="alerts",  # Use alerts topic for high-priority events
             project_info=project_info,
             session_id=session_id,
             hook_name=HOOK_NAME,
@@ -95,6 +95,7 @@ def main() -> None:
         log(f"✗ Exception details: {str(e)}", HOOK_NAME)
         log("✗ Full traceback:", HOOK_NAME)
         import traceback
+
         log(traceback.format_exc(), HOOK_NAME)
 
 
