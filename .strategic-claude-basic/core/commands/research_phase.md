@@ -69,6 +69,32 @@ Then wait for the user's input.
    - Read REFERENCES.md if it exists
    - This provides full product context before phase research
 
+### Step 1.5: Architecture Decision Records (ADR) Review
+
+1. **Discover and read all relevant ADRs**:
+
+   - Use Glob to find all ADR files: `.strategic-claude-basic/decisions/ADR_*.md`
+   - Read all ADRs with status: accepted, proposed (skip rejected, superseded)
+   - Extract key decisions, rationale, and consequences that may impact phase research
+   - Note any decisions that directly affect the phase deliverables or approach
+
+2. **If ADRs are found**, analyze their relevance to the phase:
+
+   ```
+   Found [N] Architecture Decision Records:
+   - ADR-NNNN: [Title] - [Status] - [Impact on phase research]
+   - ADR-NNNN: [Title] - [Status] - [Impact on phase research]
+
+   These architectural decisions will guide the research approach for this phase.
+   ```
+
+3. **If no ADRs found**, note this for context:
+
+   ```
+   No Architecture Decision Records found in .strategic-claude-basic/decisions/
+   Phase research will proceed without architectural decision constraints.
+   ```
+
 ### Step 2: Phase Extraction and Validation
 
 1. **Parse the provided phase number**:
@@ -187,6 +213,7 @@ Then wait for the user's input.
    - Current state analysis (what exists today)
    - Implementation approach (how to build it)
    - Technical challenges (what obstacles exist)
+   - ADR compliance considerations (how approach aligns with architectural decisions)
    - Success validation (how to verify completion)
    - Integration points (how it connects to other components)
 
@@ -221,6 +248,8 @@ Then wait for the user's input.
      - `phase: "[Phase number and name]"`
      - `phase_deliverables: [List of key deliverables]`
      - `related_docs: ["PRD.md", "ARCHITECTURE.md", "ROADMAP.md"]`
+     - `related_adrs: [List of relevant ADR numbers]`
+   - Include relevant ADR references in findings sections
    - Write document to: `.strategic-claude-basic/research/[filename]` using the naming convention rules
    - Update the `@.strategic-claude-basic/research/CLAUDE.md` file with the new document entry
 
@@ -242,6 +271,10 @@ Then wait for the user's input.
    - [Specific approach for key deliverable]
    - [Risk mitigation strategy]
    - [Success criteria validation approach]
+
+   **ADR Compliance**:
+   - [How findings align with or are constrained by architectural decisions]
+   - [Any conflicts that may require new ADRs]
 
    **Next Steps**:
    - [Immediate actions based on research]
@@ -279,6 +312,13 @@ Then wait for the user's input.
 - Identify how to validate each deliverable completion
 - Highlight dependencies that could impact phase timeline
 - Address risks and mitigation strategies from the roadmap
+
+4. **Be ADR-Compliant**:
+
+- All research findings must consider existing architectural decisions
+- Flag any conflicts between phase requirements and accepted ADRs
+- Reference relevant ADR numbers (ADR-NNNN) when decisions influence findings
+- Note when new ADRs may be needed for phase-specific architectural decisions
 
 4. **Be Implementation-Ready**:
 

@@ -31,7 +31,33 @@ If no topic was provided or if you need to specify what to research, please tell
    - Create a research plan using TodoWrite to track all subtasks
    - Consider which directories, files, or architectural patterns are relevant
 
-3. **Spawn parallel sub-agent tasks for comprehensive research:**
+### Step 2.5: Architecture Decision Records (ADR) Review
+
+1. **Discover and read all relevant ADRs**:
+
+   - Use Glob to find all ADR files: `.strategic-claude-basic/decisions/ADR_*.md`
+   - Read all ADRs with status: accepted, proposed (skip rejected, superseded)
+   - Extract key decisions, rationale, and consequences that may impact research
+   - Note any decisions that directly affect the research topic or approach
+
+2. **If ADRs are found**, analyze their relevance:
+
+   ```
+   Found [N] Architecture Decision Records:
+   - ADR-NNNN: [Title] - [Status] - [Relevance to research topic]
+   - ADR-NNNN: [Title] - [Status] - [Relevance to research topic]
+
+   These architectural decisions will inform the research approach and findings.
+   ```
+
+3. **If no ADRs found**, note this for context:
+
+   ```
+   No Architecture Decision Records found in .strategic-claude-basic/decisions/
+   Research will proceed without architectural decision constraints.
+   ```
+
+4. **Spawn parallel sub-agent tasks for comprehensive research:**
 
    - Create multiple Task agents to research different aspects concurrently
    - We now have specialized agents that know how to do specific research tasks:
@@ -55,7 +81,7 @@ If no topic was provided or if you need to specify what to research, please tell
    - Each agent knows its job - just tell it what you're looking for
    - Don't write detailed prompts about HOW to search - the agents already know
 
-4. **Wait for all sub-agents to complete and synthesize findings:**
+5. **Wait for all sub-agents to complete and synthesize findings:**
 
    - IMPORTANT: Wait for ALL sub-agent tasks to complete before proceeding
    - Compile all sub-agent results (both codebase and thoughts findings)
@@ -65,7 +91,7 @@ If no topic was provided or if you need to specify what to research, please tell
    - Highlight patterns, connections, and architectural decisions
    - Answer the user's specific questions with concrete evidence
 
-5. **Gather metadata for research document:**
+6. **Gather metadata for research document:**
    Run these commands to gather all required metadata before writing the document:
 
    ```bash
@@ -87,21 +113,23 @@ If no topic was provided or if you need to specify what to research, please tell
 
    Use these values to populate the frontmatter template. Never create documents with placeholder values.
 
-6. **Generate research document:**
+7. **Generate research document:**
 
    - Use template: `@.strategic-claude-basic/templates/commands/research.template.md`
    - Replace ALL bracketed placeholders with actual metadata gathered in step 5
    - Follow naming convention from: `@.strategic-claude-basic/research/CLAUDE.md`
+   - Include relevant ADR references in frontmatter and findings sections
    - Write document to: `.strategic-claude-basic/research/[filename]` using the naming convention rules
    - Update the `@.strategic-claude-basic/research/CLAUDE.md` file with the new document entry
 
-7. **Present findings:**
+8. **Present findings:**
 
    - Present a concise summary of findings to the user
    - Include key file references for easy navigation
+   - Reference any relevant ADRs that influenced or constrain the research findings
    - Ask if they have follow-up questions or need clarification
 
-8. **Handle follow-up questions:**
+9. **Handle follow-up questions:**
    - If the user has follow-up questions, append to the same research document
    - Update the frontmatter fields `last_updated` and `last_updated_by` to reflect the update
    - Add `last_updated_note: "Added follow-up research for [brief description]"` to frontmatter
@@ -114,6 +142,7 @@ If no topic was provided or if you need to specify what to research, please tell
 - Always use parallel Task agents to maximize efficiency and minimize context usage
 - Always run fresh codebase research - never rely solely on existing research documents
 - The @.strategic-claude-basic/research/ directory provides historical context to supplement live findings
+- Review and consider all relevant ADRs to ensure research aligns with architectural decisions
 - Focus on finding concrete file paths and line numbers for developer reference
 - Research documents should be self-contained with all necessary context
 - Each sub-agent prompt should be specific and focused on read-only operations

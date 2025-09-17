@@ -72,6 +72,32 @@ Then wait for the user's input.
    - Read REFERENCES.md if it exists
    - This provides full product context before phase planning
 
+### Step 1.5: Architecture Decision Records (ADR) Review
+
+1. **Discover and read all relevant ADRs**:
+
+   - Use Glob to find all ADR files: `.strategic-claude-basic/decisions/ADR_*.md`
+   - Read all ADRs with status: accepted, proposed (skip rejected, superseded)
+   - Extract key decisions, rationale, and consequences that may impact phase planning
+   - Note any decisions that directly affect the phase deliverables or technical approach
+
+2. **If ADRs are found**, analyze their impact:
+
+   ```
+   Found [N] Architecture Decision Records:
+   - ADR-NNNN: [Title] - [Status] - [Brief impact on planning]
+   - ADR-NNNN: [Title] - [Status] - [Brief impact on planning]
+
+   These decisions will be considered during phase planning to ensure alignment.
+   ```
+
+3. **If no ADRs found**, note this for future reference:
+
+   ```
+   No Architecture Decision Records found in .strategic-claude-basic/decisions/
+   Phase planning will proceed without architectural constraints from ADRs.
+   ```
+
 ### Step 2: Phase/Milestone Extraction and Validation
 
 1. **Parse the provided phase/milestone number**:
@@ -219,7 +245,9 @@ Then wait for the user's input.
    - Use template: `@.strategic-claude-basic/templates/commands/plan.template.md`
    - Replace ALL bracketed placeholders with actual milestone details
    - Follow naming convention: `PLAN_NNNN_DD-MM-YYYY_day_phase[X]-[Y]-[subject].md`
+   - Include relevant ADR references in frontmatter and content
    - Focus on building phases, architecture, and implementation approach
+   - Ensure approach aligns with accepted architectural decisions
 
 3. **Create test plan document for the same milestone**:
 
@@ -227,6 +255,7 @@ Then wait for the user's input.
    - Replace ALL bracketed placeholders with test-specific milestone details
    - Follow naming convention: `TEST_NNNN_DD-MM-YYYY_day_phase[X]-[Y]-[subject].md` (same number as implementation plan)
    - Cross-reference the implementation plan in References section
+   - Include ADR compliance testing where architectural decisions require validation
    - Focus on test coverage, validation strategy, and quality assurance for milestone deliverables
 
 4. **Structure both plans around milestone deliverables**:
@@ -236,6 +265,7 @@ Then wait for the user's input.
    - Current state analysis (what exists today)
    - Implementation approach (how to build it)
    - Technical challenges (what obstacles exist)
+   - ADR compliance (how approach aligns with architectural decisions)
    - Success validation (automated and manual criteria)
    - Integration points (how it connects to other components)
 
@@ -312,21 +342,28 @@ Then wait for the user's input.
 - Prioritize deliverables that impact milestone success criteria
 - Connect technical solutions to business outcomes defined in the milestone
 
-2. **Be Implementation-Ready**:
+2. **Be ADR-Compliant**:
+
+- All implementation approaches must align with accepted architectural decisions
+- Flag any conflicts between milestone requirements and existing ADRs
+- Reference relevant ADR numbers (ADR-NNNN) when decisions influence approach
+- Note when new ADRs may be needed for milestone-specific decisions
+
+3. **Be Implementation-Ready**:
 
 - Provide actionable implementation steps for milestone deliverables
 - Include specific code examples and patterns from existing codebase
 - Identify reusable components and utilities
 - Define clear success criteria (automated and manual)
 
-3. **Be Research-Informed**:
+4. **Be Research-Informed**:
 
 - Read ALL related research documents before planning
 - Include specific file paths and line numbers for implementation references
 - Cross-reference technical solutions with research findings
 - Address technical challenges identified in research
 
-4. **Be Scope-Appropriate**:
+5. **Be Scope-Appropriate**:
 
 - Single milestone plans focus exclusively on that milestone
 - Full phase plans create separate, focused plans per milestone

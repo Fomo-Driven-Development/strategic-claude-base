@@ -247,30 +247,38 @@ Please review the documentation and let me know:
 
 - Read all research files COMPLETELY before planning
 - Research actual technical capabilities using parallel sub-tasks & sub-agents
+- Review all relevant ADRs and ensure architectural compliance
 - Include specific file paths and line numbers for technical references
 - Create detailed, actionable documentation with clear success criteria
 
-3. **Be Collaborative**:
+3. **Be ADR-Compliant**:
+
+- All product documentation must align with accepted architectural decisions
+- Flag any conflicts between product requirements and existing ADRs
+- Reference relevant ADR numbers (ADR-NNNN) when decisions influence product direction
+- Note when new ADRs may be needed for product-specific architectural decisions
+
+4. **Be Collaborative**:
 
 - Don't create all documentation in one shot
 - Get buy-in at each major step
 - Allow course corrections and refinements
 - Work iteratively with user feedback
 
-4. **Be Practical**:
+5. **Be Practical**:
 
 - Ground recommendations in actual codebase capabilities
 - Consider resource constraints and timelines
 - Include realistic implementation phases
 - Address risks and mitigation strategies
 
-5. **Track Progress**:
+6. **Track Progress**:
 
 - Use TodoWrite to track documentation creation tasks
 - Update todos as you complete research and analysis
 - Mark documentation tasks complete when done
 
-6. **Maintain Quality Standards**:
+7. **Maintain Quality Standards**:
 
 - All documents must be production-ready quality
 - Include measurable success criteria

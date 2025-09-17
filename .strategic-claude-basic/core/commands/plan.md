@@ -69,6 +69,32 @@ Then wait for the user's input.
    - Read them FULLY into the main context
    - This ensures you have complete understanding before proceeding
 
+### Step 1.5: Architecture Decision Records (ADR) Review
+
+1. **Discover and read all relevant ADRs**:
+
+   - Use Glob to find all ADR files: `.strategic-claude-basic/decisions/ADR_*.md`
+   - Read all ADRs with status: accepted, proposed (skip rejected, superseded)
+   - Extract key decisions, rationale, and consequences that may impact implementation
+   - Note any decisions that directly affect the planned implementation approach
+
+2. **If ADRs are found**, analyze their impact:
+
+   ```
+   Found [N] Architecture Decision Records:
+   - ADR-NNNN: [Title] - [Status] - [Brief impact on implementation]
+   - ADR-NNNN: [Title] - [Status] - [Brief impact on implementation]
+
+   These decisions will guide the implementation approach to ensure architectural compliance.
+   ```
+
+3. **If no ADRs found**, note this for future reference:
+
+   ```
+   No Architecture Decision Records found in .strategic-claude-basic/decisions/
+   Implementation planning will proceed without architectural constraints from ADRs.
+   ```
+
 4. **Analyze and verify understanding**:
 
    - Cross-reference the ticket requirements with actual code
@@ -222,7 +248,9 @@ After structure approval and test requirements determination:
    - Replace ALL bracketed placeholders with actual details.
    - Follow naming convention from: `@.strategic-claude-basic/plan/CLAUDE.md`
    - Write document to: `@.strategic-claude-basic/plan/PLAN_[NNNN]_[date]_[subject].md`
+   - Include relevant ADR references in frontmatter and content
    - Focus on implementation phases, architecture, and building the feature
+   - Ensure approach aligns with accepted architectural decisions
 
 2. **Generate test plan document (if tests required):**
 
@@ -230,6 +258,7 @@ After structure approval and test requirements determination:
    - Replace ALL bracketed placeholders with test-specific details
    - Follow naming convention: `TEST_[NNNN]_[date]_[subject].md`
    - Cross-reference the implementation plan
+   - Include ADR compliance testing where architectural decisions require validation
    - Focus on test coverage, test types, and validation strategy
 
 3. **Update plan registry:**
@@ -304,23 +333,31 @@ Please review both plans and let me know:
 
 - Read all context files COMPLETELY before planning
 - Research actual code patterns using parallel sub-tasks & sub-agents
+- Review all relevant ADRs and ensure architectural compliance
 - Include specific file paths and line numbers
 - Write measurable success criteria with clear automated vs manual distinction
 
-4. **Be Practical**:
+4. **Be ADR-Compliant**:
+
+- All implementation approaches must align with accepted architectural decisions
+- Flag any conflicts between requirements and existing ADRs
+- Reference relevant ADR numbers (ADR-NNNN) when decisions influence approach
+- Note when new ADRs may be needed for implementation-specific decisions
+
+5. **Be Practical**:
 
 - Focus on incremental, testable changes
 - Consider migration and rollback
 - Think about edge cases
 - Include "what we're NOT doing"
 
-5. **Track Progress**:
+6. **Track Progress**:
 
 - Use TodoWrite to track planning tasks
 - Update todos as you complete research
 - Mark planning tasks complete when done
 
-6. **No Open Questions in Final Plan**:
+7. **No Open Questions in Final Plan**:
 
 - If you encounter open questions during planning, STOP
 - Research or ask for clarification immediately
