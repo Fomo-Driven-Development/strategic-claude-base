@@ -6,11 +6,17 @@ A structured template system for Claude AI development workflows with specialize
 
 **Branch**: `ccr-template`
 
-This branch contains enhancements specifically designed for Claude Code Router (CCR) compatibility, including:
+This branch is specifically configured for use with Claude Code Router (CCR) and includes enhancements designed for CCR compatibility:
 
 - **Web Search MCP Integration**: The `web-search-researcher` subagent has been updated to use MCP (Model Context Protocol) web search tools instead of the built-in WebSearch tool for improved search capabilities
 - **Enhanced Web Research**: More powerful and flexible web search options with support for comprehensive searches, quick summaries, and direct URL content extraction
 - **Architecture Decision Records (ADR)**: Complete ADR system for tracking architectural decisions
+- **MCP Configuration**: MCP web search server configuration in `.mcp.json`
+- **Backward Compatibility**: Maintains compatibility with existing workflows
+
+To use the web search functionality, ensure the MCP web search server is properly configured and running.
+
+This framework emphasizes structured documentation over traditional development workflows.
 
 ### MCP Web Search Tools
 
@@ -235,15 +241,3 @@ Available Mortal Kombat themed notification sounds:
 - `finisshh-him.mp3` - Fatality announcement
 - `that-was-pathetic.mp3` - Taunt sound
 - `gutter-trash.mp3` - Insult sound
-
-## Claude Code Router Compatibility
-
-This branch is specifically configured for use with Claude Code Router (CCR) and includes:
-- MCP web search server configuration in `.mcp.json`
-- Enhanced web research capabilities through the `web-search-researcher` subagent
-- Complete ADR system for architectural decision tracking
-- Backward compatibility with existing workflows
-
-To use the web search functionality, ensure the MCP web search server is properly configured and running.
-
-This framework emphasizes structured documentation over traditional development workflows.
