@@ -61,7 +61,7 @@ The following MCP tools are now available through the web-search-researcher agen
 
 ```
 strategic-claude-base/
-├── .claude/             # Claude configuration
+├── .claude/             # Claude Code configuration
 │   ├── agents/          # Custom agent definitions
 │   │   └── strategic -> ../../.strategic-claude-basic/core/agents
 │   ├── commands/        # Custom commands
@@ -69,6 +69,12 @@ strategic-claude-base/
 │   ├── hooks/           # Git hooks
 │   │   └── strategic -> ../../.strategic-claude-basic/core/hooks
 │   └── settings.local.json
+├── .codex/              # claude-codex configuration
+│   ├── config.toml      # Hook configuration
+│   ├── hooks/           # Hook symlinks
+│   │   └── strategic -> ../../.strategic-claude-basic/core/hooks
+│   └── prompts/         # Prompt symlinks
+│       └── strategic -> ../../.strategic-claude-basic/core/commands
 ├── .git/                # Git repository
 ├── .strategic-claude-basic/
 │   ├── archives/        # Archived documentation
@@ -77,6 +83,8 @@ strategic-claude-base/
 │   │   ├── agents/      # Core agent definitions
 │   │   ├── commands/    # Core commands
 │   │   └── hooks/       # Core hooks
+│   ├── decisions/       # Architecture Decision Records (ADRs)
+│   │   └── CLAUDE.md
 │   ├── guides/          # User guides
 │   │   └── ast-grep-patterns.md
 │   ├── issues/          # Issue tracking
@@ -174,6 +182,30 @@ For comprehensive product development:
 - **Research Phase**: Focused research on specific roadmap phase requirements
 - **Plan Phase**: Create implementation plan for the specific phase
 - **Execute & Summarize**: Implement and document progress
+
+## claude-codex Integration
+
+The `.codex/` directory provides integration with [claude-codex](https://github.com/Fomo-Driven-Development/claude-codex), a special version of codex that adds hooks and commands similar to Claude Code.
+
+### Configuration
+
+- **`config.toml`** - Hook configuration for claude-codex
+- **`hooks/strategic`** - Symlink to shared hooks in `.strategic-claude-basic/core/hooks/`
+- **`prompts/strategic`** - Symlink to shared commands in `.strategic-claude-basic/core/commands/`
+
+The symlinks ensure that both Claude Code (`.claude/`) and claude-codex (`.codex/`) use the same underlying strategic commands and hooks.
+
+## Architecture Decision Records (ADRs)
+
+The `.strategic-claude-basic/decisions/` directory contains Architecture Decision Records that document important architectural decisions made during development.
+
+### ADR Commands
+
+- **`/adr_create`** - Create a new ADR document
+- **`/adr_update`** - Update an existing ADR with new information
+- **`/adr_list`** - List all ADRs in the project
+
+ADRs help maintain architectural consistency and provide context for future development decisions.
 
 ## Hooks
 
