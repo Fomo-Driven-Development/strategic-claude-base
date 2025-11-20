@@ -70,6 +70,11 @@ For focused implementation tasks:
 /plan @.strategic-claude-basic/research/RESEARCH_0001_13-09-2025_fri_user-auth.md
 /read_execute_plan @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md
 /summarize @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md
+
+/read_execute_plan @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md \
+@.strategic-claude-basic/summary/SUMMARY_PLAN_0001_13-09-2025_fri_user-auth.md
+
+/update_summary @.strategic-claude-basic/summary/SUMMARY_PLAN_0001_13-09-2025_fri_user-auth.md
 ```
 
 **Purpose:**
