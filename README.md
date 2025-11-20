@@ -12,16 +12,9 @@ strategic-claude-base/
 │   ├── hooks/           # Git hooks
 │   │   └── strategic -> ../../.strategic-claude-basic/core/hooks
 │   └── settings.local.json
-├── .codex/              # claude-codex configuration
-│   ├── config.toml      # Hook configuration
-│   ├── hooks/           # Hook symlinks
-│   │   └── strategic -> ../../.strategic-claude-basic/core/hooks
-│   └── prompts/         # Prompt symlinks
-│       └── strategic -> ../../.strategic-claude-basic/core/commands
 ├── .git/                # Git repository
 ├── .strategic-claude-basic/
 │   ├── archives/        # Archived documentation
-│   │   └── .gitkeep
 │   ├── core/            # Commands and agent definitions
 │   │   ├── agents/      # Core agent definitions
 │   │   ├── commands/    # Core commands
@@ -29,7 +22,6 @@ strategic-claude-base/
 │   ├── decisions/       # Architecture Decision Records (ADRs)
 │   │   └── CLAUDE.md
 │   ├── guides/          # User guides
-│   │   └── ast-grep-patterns.md
 │   ├── issues/          # Issue tracking
 │   │   └── CLAUDE.md
 │   ├── plan/            # Implementation plans
@@ -46,9 +38,7 @@ strategic-claude-base/
 │   │   ├── hooks/       # Hook templates
 │   │   ├── ignore/      # Ignore file templates
 │   │   └── mcps/        # MCP templates
-│   ├── tools/           # Utility tools
-│   └── validation/      # Validation scripts
-│       └── CLAUDE.md
+│   └── tools/           # Utility tools
 ├── .pre-commit-config.yaml
 ├── LICENSE
 ├── post-install.sh
@@ -80,6 +70,11 @@ For focused implementation tasks:
 /plan @.strategic-claude-basic/research/RESEARCH_0001_13-09-2025_fri_user-auth.md
 /read_execute_plan @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md
 /summarize @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md
+
+/read_execute_plan @.strategic-claude-basic/plan/PLAN_0001_13-09-2025_fri_user-auth.md \
+@.strategic-claude-basic/summary/SUMMARY_PLAN_0001_13-09-2025_fri_user-auth.md
+
+/update_summary @.strategic-claude-basic/summary/SUMMARY_PLAN_0001_13-09-2025_fri_user-auth.md
 ```
 
 **Purpose:**
@@ -125,18 +120,6 @@ For comprehensive product development:
 - **Research Phase**: Focused research on specific roadmap phase requirements
 - **Plan Phase**: Create implementation plan for the specific phase
 - **Execute & Summarize**: Implement and document progress
-
-## claude-codex Integration
-
-The `.codex/` directory provides integration with [claude-codex](https://github.com/Fomo-Driven-Development/claude-codex), a special version of codex that adds hooks and commands similar to Claude Code.
-
-### Configuration
-
-- **`config.toml`** - Hook configuration for claude-codex
-- **`hooks/strategic`** - Symlink to shared hooks in `.strategic-claude-basic/core/hooks/`
-- **`prompts/strategic`** - Symlink to shared commands in `.strategic-claude-basic/core/commands/`
-
-The symlinks ensure that both Claude Code (`.claude/`) and claude-codex (`.codex/`) use the same underlying strategic commands and hooks.
 
 ## Architecture Decision Records (ADRs)
 

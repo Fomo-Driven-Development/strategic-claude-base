@@ -2,9 +2,7 @@
     "codex": {
         "command": "codex",
         "args": [
-            "mcp",
-            "serve"
-        ],
-        "env": {}
+            "mcp-server"
+        ]
     }
 }
