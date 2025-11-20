@@ -9,7 +9,8 @@ TOOL_DIR=".strategic-claude-basic/tools/web_explorer"
 echo "Setting up web_explorer tool..."
 
 # Copy scripts directory
-cp -r "${TOOL_DIR}/root_scripts" scripts
+mkdir -p scripts
+cp -r "${TOOL_DIR}/root_scripts/"* scripts/
 chmod +x scripts/*.sh
 echo "  - Copied scripts/"
 
