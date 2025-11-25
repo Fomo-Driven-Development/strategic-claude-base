@@ -2,7 +2,7 @@
 description: "Create issue documentation for problems found during development work"
 argument-hint: <subject_or_summary_file>
 allowed-tools: Read(./**), Write(./.strategic-claude-basic/issues/**), Bash(git:*, date:*, grep:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating brief, solution-focused issue documentation for problems discovered during development work. You should be fast, focused, and avoid extensive research - document what you know from context.

@@ -2,7 +2,7 @@
 description: "Create implementation plans for specific roadmap phases or milestones"
 argument-hint: <phase_or_milestone_number> [--with-codex] [optional_focus_area]
 allowed-tools: Read(./**), Write(.strategic-claude-basic/plan/**), Task, Bash(mkdir:*, date:*, git:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating focused implementation plans for specific phases or milestones from the product roadmap. You should validate product documentation exists, extract phase/milestone-specific requirements, and create detailed implementation plans aligned with the phase objectives and deliverables.

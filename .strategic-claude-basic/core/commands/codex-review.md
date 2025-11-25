@@ -2,7 +2,7 @@
 description: "Review the most recent committed changes using the codex-review agent"
 argument-hint: [optional_commit_ref]
 allowed-tools: Task, Bash(git:*)
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with reviewing code changes using the specialized codex-review agent. This command analyzes the most recent committed changes (or a specific commit if provided) and provides comprehensive code review feedback.

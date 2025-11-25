@@ -2,7 +2,7 @@
 description: "Generate a problem-focused summary of the current implementation work"
 argument-hint: [optional_plan_reference]
 allowed-tools: Read(./**), Write(./.strategic-claude-basic/summary/**), Bash(git:*, date:*, grep:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating implementation summaries that focus on problems, incomplete work, and outstanding issues from the current work session. You should be problem-focused, session-scoped, and work only with uncommitted changes and current context.

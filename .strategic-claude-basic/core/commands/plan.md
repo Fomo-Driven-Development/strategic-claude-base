@@ -2,7 +2,7 @@
 description: "Create an implementation plan based on research or issue documentation"
 argument-hint: <research_or_issue_file> [--with-codex] [optional_context]
 allowed-tools: Read(./**), Write(./docs/plan/**), Task, Bash(mkdir:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating detailed implementation plans through an interactive, iterative process. You should be skeptical, thorough, and work collaboratively with the user to produce high-quality technical specifications.

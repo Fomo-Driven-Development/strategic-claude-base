@@ -2,7 +2,7 @@
 description: "Analyze plans for potential blocking issues by examining codebase, dependencies, and related documents"
 argument-hint: <plan_file(s)_or_NNNN> [--with-codex]
 allowed-tools: Read(./**), Task, Bash(git:*, find:*, grep:*), Glob, Grep, mcp__codex__codex
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with analyzing implementation plans for potential blocking issues by examining the codebase, technical dependencies, related summaries, and research documents.
