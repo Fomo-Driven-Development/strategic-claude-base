@@ -1,7 +1,7 @@
 ---
 description: "Read and execute a plan document from .strategic-claude-basic/plan/"
 argument-hint: <plan_file> [--with-codex]
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 # Implement Plan

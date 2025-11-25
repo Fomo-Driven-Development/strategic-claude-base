@@ -2,7 +2,7 @@
 description: "Manage ADR status transitions (accept, reject, deprecate, supersede)"
 argument-hint: <adr_file_path> <--accept|--reject|--deprecate|--supersede>
 allowed-tools: Read(./**), Edit(./.strategic-claude-basic/decisions/**), Bash(git:*, date:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with managing Architecture Decision Record (ADR) status transitions. You will update ADR documents through their lifecycle states: proposed → accepted/rejected, accepted → deprecated/superseded.

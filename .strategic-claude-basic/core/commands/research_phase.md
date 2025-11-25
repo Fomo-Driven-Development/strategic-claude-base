@@ -2,7 +2,7 @@
 description: "Conduct focused research on a specific product roadmap phase"
 argument-hint: <phase_number> [optional_focus_area]
 allowed-tools: Read(./**), Write(./strategic-claude-basic/research/**), Task, Bash(mkdir:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with conducting focused research on a specific phase from the product roadmap. You should validate product documentation exists, extract phase-specific requirements, and conduct comprehensive research aligned with the phase objectives and deliverables.

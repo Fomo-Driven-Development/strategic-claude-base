@@ -2,7 +2,7 @@
 description: "Update an existing summary document with latest implementation progress"
 argument-hint: <summary_file_path>
 allowed-tools: Read(./**), Write(./.strategic-claude-basic/summary/**), Bash(git:*, date:*, grep:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with updating existing implementation summaries by analyzing the current work session and intelligently merging new findings with existing problems and incomplete work. You should be smart enough to detect if the wrong summary document was provided and only update summaries that are specific to the current work.

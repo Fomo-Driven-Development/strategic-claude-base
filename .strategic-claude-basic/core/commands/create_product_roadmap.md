@@ -2,7 +2,7 @@
 description: "Create comprehensive product documentation (PRD, ARCHITECTURE, ROADMAP, REFERENCES) based on research and requirements analysis"
 argument-hint: <research_file_1> [research_file_2] [additional_research_files] [optional_context]
 allowed-tools: Read(./**), Write(./strategic-claude-basic/product/**), Task, Bash(mkdir:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating comprehensive product documentation through an interactive, iterative process. You should be thorough, strategic, and work collaboratively with the user to produce high-quality product specifications covering requirements, architecture, roadmap, and implementation references.

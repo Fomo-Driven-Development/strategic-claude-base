@@ -2,7 +2,7 @@
 description: "Conduct research on a topic and generate documentation following project standards"
 argument-hint: <topic> [--with-codex] [--greenfield] [optional_description]
 allowed-tools: Read(./**), Write(./strategic-claude-basic/research/**), Task, Bash(mkdir:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with conducting comprehensive research across the codebase to answer user questions by spawning parallel sub-agents and synthesizing their findings.

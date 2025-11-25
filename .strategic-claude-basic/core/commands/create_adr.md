@@ -2,7 +2,7 @@
 description: "Create Architecture Decision Record (ADR) documentation for architectural decisions"
 argument-hint: <decision_context_or_subject>
 allowed-tools: Read(./**), Write(./.strategic-claude-basic/decisions/**), Bash(git:*, date:*, grep:*), Glob
-model: claude-sonnet-4-5
+model: claude-opus-4-5
 ---
 
 You are tasked with creating focused, well-structured Architecture Decision Record (ADR) documentation for architectural decisions. You should be efficient, focused, and avoid extensive research - document the decision context you know.
